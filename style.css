@@ -144,17 +144,17 @@ footer {
     padding: 2px 15px;
 }
 
-.navbarfooter {
+.footernav .navbarfooter {
 	margin-right: 20px;
 	list-style: none; 
 }
 
-.navbarfooter li {
+.footernav .navbarfooter li {
 	display: inline-block;
 	padding: 0px 30px;
 }
 
-.navbarfooter li a:hover {
+.footernav .navbarfooter li a:hover {
     border-radius: 15px;
     padding: 2px 15px;
 }
@@ -165,11 +165,11 @@ footer {
   
 		text-align: center;
 	  }
-	  .navbarfooter{
+	  .footernav .navbarfooter{
 		  text-align: center;
 	  }
   
-	  .navbarfooter li {
+	  .footernav .navbarfooter li {
 		  display: inline-block;
 		  padding: 15px 10px;
 	  }
@@ -180,10 +180,10 @@ footer {
 	  flex-direction: column;
 	  text-align: center;
 	}
-	.navbarfooter{
+	.footernav .navbarfooter{
 		text-align: center;
 	}
-	.navbarfooter li {
+	.footernav .navbarfooter li {
 		display: inline-block;
 		padding: 15px 5px;
 	}
