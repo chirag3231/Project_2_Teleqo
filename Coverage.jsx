@@ -7,17 +7,10 @@ class Coverage extends Component {
   constructor() {
     super(...arguments);
     this.heatmapData = [
-        [73, 89, 86, 69],
-        [93, 88, 73, 78],
-        [93, 78, 62, 64],
-        [74, 66, 97, 69],
-        [77, 86, 87, 57],
-        [93, 88, 73, 78],
-        [56, 69, 21, 86],
-        [85, 77, 83, 81],
-        [60, 77, 74, 68],
-        [93, 88, 73, 78],
-        [41, 55, 73, 23]
+        [73,93,93,74,77,93,56,85,60,93,41],
+        [89,88,78,66,86,88,69,77,77,88,55],
+        [86,73,62,97,87,73,21,83,74,73,73],
+        [69,78,64,69,57,78,86,81,68,78,23]
        
     ];
 }
@@ -38,26 +31,23 @@ class Coverage extends Component {
               </li>
             </ul>
             </p>
-            <h5>
-            We have used the data from Statista.com to make best coverage map for you. 
-            </h5>
+            
           </div>
         </div>
         <div className="row">
           <div className="col-md-offset-2 col-md-8 home-agile-text home-agile-text1">
             <div>
               
-
-<HeatMapComponent id='heatmap' titleSettings={{
+{/* Using react component heatmap to show network strength  */}
+<HeatMapComponent id='heatmap'  width={'100%'} height={'80%'}  titleSettings={{
             text: 'Network strength in provinces of Canada',
             textStyle: {
-                size: '15px',
+                size: '20px',
                 fontWeight: '500',
                 fontStyle: 'Normal',
                 fontFamily: 'Segoe UI'
             }
-        }} 
-        xAxis={{
+        }} yAxis={{
             labels: ['BC','ON','AB','NS','NL','PE','MB','QC','NB','SK','YT','NT','NU'],
             multiLevelLabels: [
               {
@@ -72,9 +62,7 @@ class Coverage extends Component {
                   ]
               },
           ]
-            }}
-            
-            yAxis={{
+            }} xAxis={{
             labels: ["Bel", "Rog", "Tel", "Fre"],
             multiLevelLabels: [
               { 
@@ -105,13 +93,17 @@ class Coverage extends Component {
          
           enableSmartLegend: true,
           toggleVisibility: true
-      }} 
-      dataSource={this.heatmapData}>
-        
+      }} dataSource={this.heatmapData}>
+        {/* Injecting legend on the right side of the right side of the heatmap */}
       <Inject services={[Legend]}/>
             <Inject services={[Legend, Tooltip, Adaptor]}/>
+            
             </HeatMapComponent>
-    
+            <div className="sitation">
+            <h5>
+            We have used the data from Statista.com to make best coverage map for you. 
+            </h5>
+            </div>
             </div>
           </div>
         </div>
