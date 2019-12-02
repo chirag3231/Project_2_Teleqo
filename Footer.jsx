@@ -7,8 +7,8 @@ class Footer extends Component {
   return (
     <footer>
       <div><img src={logofooter} class="logofooter" alt="logo" /></div>
-      <div><nav>
-            <ul class="navbar">
+      <div><nav class="footernav">
+            <ul class="navbarfooter">
             <li><a href="home.jsx">Home</a></li>
                 <li><a href="coverage.jsx">Coverage</a></li>	
                 <li><a href="about.jsx">About us</a></li>
