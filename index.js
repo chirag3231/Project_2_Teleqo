@@ -1,11 +1,10 @@
-// Main File 
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const dbConnect = mysql.createConnection({
   host: 'localhost',
-  user: 'shubham',
-  password: 'test124',
+  user: 'root',
+  password: '',
   database: 'college_rajat'
 });
 
@@ -25,7 +24,7 @@ app.get('/', function (req, res) {
 });
 
 // Company routes 
-app.get('/company/:id(\\d+)/', function (req, res) {
+app.get('/api/v1/company/:id(\\d+)/', function (req, res) {
   let companyId = req.params.id;
   console.log(companyId);
   dbConnect.query('SELECT * FROM companies WHERE id = ? LIMIT 1', [companyId], function (err, result, fields) {
@@ -34,14 +33,14 @@ app.get('/company/:id(\\d+)/', function (req, res) {
   })
 });
 
-app.get('/company/all', function (req, res) {
+app.get('/api/v1/company/all', function (req, res) {
   dbConnect.query('SELECT * FROM companies', function (err, result, fields) {
     if (err) throw err;
     res.json(result);
   })
 });
 
-app.post('/company', function (req, res) {
+app.post('/api/v1/company', function (req, res) {
   let name = req.body.name;
 
   if (name === '') {
@@ -61,7 +60,7 @@ app.post('/company', function (req, res) {
 });
 
 // Plan
-app.get('/plan/:id(\\d+)/', function (req, res) {
+app.get('/api/v1/plan/:id(\\d+)/', function (req, res) {
   let companyId = req.params.id;
   console.log(companyId);
   dbConnect.query('SELECT * FROM plans WHERE id = ? LIMIT 1', [companyId], function (err, result, fields) {
@@ -69,14 +68,14 @@ app.get('/plan/:id(\\d+)/', function (req, res) {
     res.json(result[0]);
   })
 });
-app.get('/plan/all', function (req, res) {
+app.get('/api/v1/plan/all', function (req, res) {
   dbConnect.query('SELECT * FROM plans', function (err, result, fields) {
     if (err) throw err;
     res.json(result);
   })
 });
 
-app.post('/plan', function (req, res) {
+app.post('/api/v1/plan', function (req, res) {
   let name = req.body.name,
     price = req.body.price,
     companyId = req.body.company_id;
@@ -88,7 +87,7 @@ app.post('/plan', function (req, res) {
 });
 
 // Company Associated 
-app.get('/company/:companyId/plan/:planId(\\d+)/', function (req, res) {
+app.get('/api/v1/company/:companyId/plan/:planId(\\d+)/', function (req, res) {
   let planId = req.params.planId,
     companyId = req.params.companyId;
 
@@ -98,7 +97,7 @@ app.get('/company/:companyId/plan/:planId(\\d+)/', function (req, res) {
   })
 });
 
-app.get('/plans/company/:companyId/', function (req, res) {
+app.get('/api/v1/plans/company/:companyId/', function (req, res) {
   let companyId = req.params.companyId;
   dbConnect.query('SELECT * FROM plans WHERE company_id = ?', [companyId], function (err, result, fields) {
     if (err) throw err;
@@ -107,7 +106,7 @@ app.get('/plans/company/:companyId/', function (req, res) {
 });
 
 // Subscribers 
-app.get('/subscribers', function (req, res) {
+app.get('/api/v1/subscribers', function (req, res) {
   let filter = req.query.type,
     query = '';
 
@@ -128,7 +127,7 @@ app.get('/subscribers', function (req, res) {
 });
 
 
-app.post('/subscriber', function (req, res) {
+app.post('/api/v1/subscriber', function (req, res) {
   let name = req.body.name,
     email = req.body.email,
     plan_id = req.body.plan_id ? req.body.plan_id : null,
@@ -150,7 +149,7 @@ app.post('/subscriber', function (req, res) {
   });
 });
 
-app.get('/subscriber/:subscriberId(\\d+)/', function (req, res) {
+app.get('/api/v1/subscriber/:subscriberId(\\d+)/', function (req, res) {
   let subscriberId = req.params.subscriberId;
   dbConnect.query('SELECT * FROM subscribers WHERE id = ? LIMIT 1', [subscriberId], function (err, result, fields) {
     if (err) throw err;
@@ -158,7 +157,7 @@ app.get('/subscriber/:subscriberId(\\d+)/', function (req, res) {
   });
 });
 
-app.get('/company/:companyId/subscribers', function (req, res) {
+app.get('/api/v1/company/:companyId/subscribers', function (req, res) {
   let companyId = req.params.companyId;
   dbConnect.query('SELECT * FROM subscribers WHERE company_id = ? ', [companyId], function (err, result) {
     if (err) throw err;
@@ -166,7 +165,7 @@ app.get('/company/:companyId/subscribers', function (req, res) {
   });
 });
 
-app.get('/plan/:planId/subscribers', function (req, res) {
+app.get('/api/v1/plan/:planId/subscribers', function (req, res) {
   let planId = req.params.planId;
   dbConnect.query('SELECT * FROM subscribers WHERE plan_id = ? ', [planId], function (err, result) {
     if (err) throw err;
